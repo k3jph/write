@@ -1,0 +1,86 @@
+.\"
+.\"  Write 1.0.0
+.\"  Copyright (C) 1997  Jamie Howard <howardjp@dragon.ham.muohio.edu>
+.\"
+.\"  This program is free software; you can redistribute it and/or modify
+.\"  it under the terms of the GNU General Public License as published by
+.\"  the Free Software Foundation; either version 2 of the License, or
+.\"  (at your option) any later version.
+.\"
+.\"  This program is distributed in the hope that it will be useful,
+.\"  but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\"  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\"  GNU General Public License for more details.
+.\"
+.\"  You should have received a copy of the GNU General Public License
+.\"  along with this program; if not, write to the Free Software
+.\"  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+.\"
+.TH WRITED 8 "October 15, 1997" "Write" "Linux System Manager's Manual"
+.SH NAME
+writed \- network daemon for write protocol
+.SH SYNOPSIS
+.B writed
+[
+.I \-f
+]
+.SH DESCRIPTION
+.B Writed 
+is designed to be started from the 
+.BR inetd (8) 
+"super server".  
+.BR Inetd (8)
+should be listening on TCP port decimal 811 and 
+.BR writed
+expects the open socket to be connected to the standard input.  The
+protocol for 
+.BR write (1)
+is given in 
+.BR write (7).
+.PP
+.BR Writed 
+requires an entry in 
+.I /etc/services
+with the following text:
+.PP
+.RS
+.PD 0
+.TP
+write 811/tcp
+.PD
+.RE
+.PP
+and entry in 
+.I /etc/inetd.conf
+with the following text:
+.PP
+.RS
+.PD 0
+.TP
+write stream tcp nowait nobody /usr/sbin/tcpd in.writed
+.PD
+.RE
+.PP
+.B Writed
+is designed such that it does not have to run as root.
+.SH OPTIONS
+.TP
+.I \-f
+Do not permit unauthenticated users to connect.
+.SH SEE ALSO
+.BR mesg (1),
+.BR write (1),
+.BR write (7),
+.BR identd (8)
+.SH BUGS
+Connecting directly to the server from a TIP or an equally narrow-minded
+TELNET-protocol user program can result in meaningless attempts at option
+negotiation being sent to the server, which will foul up the command line
+interpretation.  
+.B Writed
+should be taught to filter out IAC's and perhaps even respond negatively
+(IAC WON'T) to all option commands received.
+.SH HISTORY 
+.B Writed
+was developed at the Massachusetts Institute of Technology as part of
+Project Athena.

@@ -1,0 +1,106 @@
+.\"
+.\"  Write 1.0.0
+.\"  Copyright (C) 1997  Jamie Howard <howardjp@dragon.ham.muohio.edu>
+.\"
+.\"  This program is free software; you can redistribute it and/or modify
+.\"  it under the terms of the GNU General Public License as published by
+.\"  the Free Software Foundation; either version 2 of the License, or
+.\"  (at your option) any later version.
+.\"
+.\"  This program is distributed in the hope that it will be useful,
+.\"  but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\"  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\"  GNU General Public License for more details.
+.\"
+.\"  You should have received a copy of the GNU General Public License
+.\"  along with this program; if not, write to the Free Software
+.\"  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+.\"
+.TH WRITE 7 "October 15, 1997" "Write" "Linux Programmer's Manual"
+.SH NAME
+write \- write protocol
+.SH SYNOPSIS
+The 
+.B write
+protocol permits users to communicate with each other using the 
+traditional UNIX 
+.BR write (1)
+sematics and environment.
+.SH SPECIFICATIONS
+.PP
+.PD 0
+.TP
+{user.X}  ::= username
+.TP
+{host.X}  ::= hostname
+.TP
+{tty.X}   ::= terminal
+.TP
+{lf}      ::= line feed
+.PD
+.SH PROTOCOL
+A 
+.B write
+server is listens on TCP port decimal 811.  When connected to, the server
+reads a line-feed terminated line of text up to 1023 bytes from the
+connected client.  This line of text is in one of two very simply formats:
+.PP
+.RS
+.PD 0
+.TP
+{user.1}@{host.1}@{tty.1} {user.2}{lf}
+.PD
+.RE
+.PP
+or
+.PP
+.RS
+.PD 0
+.TP
+{user.1}@{host.1}@{tty.1} {user.2} {tty.2}{lf}
+.PD
+.RE
+.PP
+In both of these formats 
+.I {user.1}
+refers to the calling user, usually their username.  The username is
+immedietly followed by an '@' symbol. Similarly, 
+.I {host.1}
+refers to the local host of the caller, preferably the fully qualified
+domain name.  If a domain name is unavailible, a numerical IP address is
+sufficent.  This host name is again followed by an '@' symbol.  Finally,
+the caller's terminal device name (tty) is denoted by
+.IR {tty.1} .
+This block should be sufficient to uniquely identify the caller to the
+recipient under any circumstances.
+.PP
+The caller block is now followed by an undefined number of spaces (ASCII
+32).  The following arguement passed is the target user's username and
+is denoted by
+.IR {user.1} .  
+This is again followed by and unspecified number of spaces.  The final
+arguement, listed as 
+.IR {tty.2} ,
+is the target user's terminal name (tty).  This command line is then
+terminated via 
+.IR {lf} ,
+a line feed.
+.PP
+Now, the client starts reading 
+.I {lf} 
+terminated lines of text from the server until the server sends a line
+containing a single 
+.I {lf}
+character.  This permits the server to send any error messages or warnings
+to the caller.  Once the single 
+.I {lf}
+character has been received, the server then goes into receive only mode
+and all new data sent from the client is displayed to the receipient.
+.SH SEE ALSO
+.BR write (1),
+.BR writed (8)
+.SH HISTORY 
+The 
+.B write
+protocol was developed at the Massachusetts Institute of Technology as
+part of Project Athena.
