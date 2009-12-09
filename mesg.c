@@ -23,9 +23,16 @@
  *  talk(1), etc.
  */
 
-#include "mesg.h"
+#include <errno.h>
+#include <paths.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
 
-void main(int argc, char *argv[]) 
+static void help();
+
+int main(int argc, char *argv[]) 
 {
 	struct stat buf;
 	int ch, quiet = 0;
