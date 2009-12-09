@@ -1,5 +1,5 @@
-This is the README file for the Dragon/Write package by James P. Howard, 
-II <jh@jameshoward.us>.  This package includes enhanced versions of 
+This is the README file for the Write package by James P. Howard, II
+<jh@jameshoward.us>.  This package includes enhanced versions of 
 write(1), mesg(1), and writed(8).  This software has only been tested 
 with the Linux operating system, however, it should port to similar
 operating systems with little trouble.
