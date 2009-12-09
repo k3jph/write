@@ -1,12 +1,8 @@
-This is the README file for the Dragon/Write package by James Howard
-<howardjp@dragon.ham.muohio.edu>.  This package includes enhanced versions
-of write(1), mesg(1), and writed(8).  This software has only been tested 
+This is the README file for the Dragon/Write package by James P. Howard, 
+II <jh@jameshoward.us>.  This package includes enhanced versions of 
+write(1), mesg(1), and writed(8).  This software has only been tested 
 with the Linux operating system, however, it should port to similar
 operating systems with little trouble.
 
 			To compile  --  make all
 			To install  --  make install (you must be "root")
-
-To download the latest version of the Dragon/Write package, go to
-dragon.ham.muohio.edu:/pub/howardjp/write.  The current version number is
-0.0.1.
