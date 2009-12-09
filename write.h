@@ -50,6 +50,3 @@ int net;
 void help(void);
 void pipeerr(int nil);
 void messyexit(int nil);
-
-#include "sock.c" 
-#include "util.c"

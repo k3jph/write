@@ -43,7 +43,10 @@ mesg: mesg.c mesg.h
 
 write: write.c write.h util.c sock.c
 	@ echo "Now creating binary for 'write'."
-	@ gcc -o write write.c
+	@ gcc -c sock.c
+	@ gcc -c util.c
+	@ gcc -c write.c
+	@ gcc -o write sock.o util.o write.o
 	@ strip write
 
 writed: writed.c write.h util.c sock.c
