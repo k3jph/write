@@ -3,9 +3,7 @@ default:
 
 all: mesg write writed
 
-clean: cleaner mesg write writed
-
-install: clean
+install: mesg write writed
 	@ echo "Copying binaries to respective directories."
 	@ echo "    mesg -> /usr/bin/mesg"
 	@ cp mesg /usr/bin/mesg
@@ -36,7 +34,7 @@ install: clean
 	@ chown root:bin /usr/man/man8/writed.8
 	@ chmod 444 /usr/man/man8/writed.8
 
-mesg: mesg.c mesg.h
+mesg: mesg.c
 	@ echo "Now creating binary for 'mesg'."
 	@ gcc -o mesg mesg.c
 	@ strip mesg
@@ -54,7 +52,7 @@ writed: writed.c write.h util.c sock.c
 	@ gcc -o writed writed.c
 	@ strip writed
 
-cleaner:
-	@- rm mesg
-	@- rm write
-	@- rm writed
+clean:
+	@- rm -rf mesg
+	@- rm -rf write sock.o util.o write.o
+	@- rm -rf writed
