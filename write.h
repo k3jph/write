@@ -17,21 +17,6 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <errno.h>
-#include <netdb.h>
-#include <paths.h>
-#include <pwd.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <utmp.h>
-#include <arpa/inet.h> 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/utsname.h>
-
 #define PE_NAMESIZE 32
 #define PE_LINESIZE 32
 
@@ -43,9 +28,9 @@ struct person
 	char *pe_host;
 };
 
-FILE *terminal;
-struct person to, from, auth;
-int net;
+extern FILE *terminal;
+extern struct person to, from, auth;
+extern int net;
 
 void help(void);
 void pipeerr(int nil);

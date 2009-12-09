@@ -17,6 +17,22 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <errno.h>
+#include <paths.h>
+#include <pwd.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <utmp.h>
+#include <arpa/inet.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/utsname.h>
+
+#include "write.h"
+
 int loop(struct person *from, struct person *to, struct person *auth)
 {
 	struct servent *service;

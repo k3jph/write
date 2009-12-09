@@ -27,6 +27,8 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include "write.h"
+
 FILE *openclient(char *server, int port, int proto)
 {
 	struct hostent *serv;
